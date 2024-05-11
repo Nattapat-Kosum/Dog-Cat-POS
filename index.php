@@ -10,7 +10,7 @@ include("src/connect/connect.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dog & Cat</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="src/css/css.css">
+    <link rel="stylesheet" href="src/css/style.css">
 
     <!-- Font @Google Font font.google.com -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,19 +45,17 @@ include("src/connect/connect.php");
 
     <section>
         <!-- navbar -->
-        <nav class="fixed-bottom no-print">
+        <nav class="navbar fixed-bottom navbar-light bg-light no-print">
             <div class="container-fluid">
-                <div class="row">
                     <div class="col-md-8 pad-nav">
-                        <ul class="navbar-nav" id="animal_type_product"></ul>
+                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0" id="animal_type_product"></ul>
                     </div>
-                </div>
             </div>
         </nav>
 
         <!-- product -->
         <div class="container-fluid mt-0 no-print">
-            <div class="row overflow-y">
+            <div class="row">
                 <div class="col-md-8" style="background-color:#F0EEED;">
                     <div id="productbox" class="row row-cols-md-3 row-cols-xxl-5 row-cols-sm-1 g-2 overflow-auto product-height mt-auto mb-auto"></div>
                 </div>
@@ -86,7 +84,7 @@ include("src/connect/connect.php");
 
                         <div class="container-fluid">
                             <div class="row mt-1">
-                                <div class="js-gtotal alert alert-danger total" id="total">รวมทั้งหมด: ฿0.00</div>
+                                <div class="js-gtotal alert alert-danger total mb-3" id="total">รวมทั้งหมด: ฿0.00</div>
                             </div>
 
                             <div class="row">
@@ -113,7 +111,7 @@ include("src/connect/connect.php");
         <!-- Print -->
         <form action="stockCut.php?action=list" method="post">
             <div class="modal fade" id="modal_print" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog modal-dialog-scrollable">
+                <div class="modal-dialog modal-dialog">
                     <div class="modal-content">
                         <div class="modal-body">
                             <div class="form-wrapper">
@@ -131,10 +129,10 @@ include("src/connect/connect.php");
         </form>
 
         <?php include "info_event.php"; ?>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="src/js/index.js"></script>
+    </section>
 
-</section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="src/js/index.js"></script>
 </body>
 </html>

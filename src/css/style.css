@@ -2,6 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
 *{
     font-family: 'Mitr', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html, body, section {
@@ -9,6 +12,11 @@ html, body, section {
     background-image: radial-gradient(circle, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
     height: 100%;
   }
+
+  #productbox::-webkit-scrollbar {
+    display: none;
+}
+  
 
 .custom-bg-dog {
     background-color: #8C3333;
@@ -215,7 +223,7 @@ img.navbar_icon {
 }
 
 .border-white {
-    width: 75px;
+    width: 100px;
 }
 
 .pad-nav {
@@ -239,6 +247,18 @@ img.navbar_icon {
         font-size: 0.825rem;
     }
 
+    .font-confirm {
+        font-size: 17px;
+    }
+
+    .btn-confirm {
+        padding: 15px 30px;
+    }
+
+    .btn-clear {
+        padding: 15px 25px;
+    }
+
     .price-td {
         font-size: 0.825rem;
     }
@@ -256,23 +276,6 @@ img.navbar_icon {
         height: 130px;
     }
 
-    .btn-confirm {
-        background-color: #1450A3;
-        border: 2px solid #1450A3;
-        border-radius: 10px;
-        color: white;
-        padding: 15px 28px;
-        text-align: center;
-    }
-
-    .btn-clear {
-        color: #1450A3;
-        border: 2px solid #1450A3; 
-        border-radius: 10px;
-        padding: 15px 20px;
-        text-align: center;
-    }
-    
     .size-change {
         font-size: 0.825rem;
     }
@@ -288,7 +291,7 @@ img.navbar_icon {
     
 }
 
-@media (max-width: 1400px) and (min-width: 1279px) {
+@media (max-width: 1400px) and (min-width: 1196px) {
 
     h3 {
         font-size: 24px;
@@ -320,25 +323,16 @@ img.navbar_icon {
         font-size: 16px;
     }
 
-    .card-product {
-        height: 120px;
-    }
-
     .btn-confirm {
-        background-color: #1450A3;
-        border: 2px solid #1450A3;
-        border-radius: 10px;
-        color: white;
-        padding: 15px 10px;
-        text-align: center;
+        padding: 15px 20px;
     }
 
     .btn-clear {
-        color: #1450A3;
-        border: 2px solid #1450A3; 
-        border-radius: 10px;
-        padding: 15px 5px;
-        text-align: center;
+        padding: 15px 10px;
+    }
+
+    .card-product {
+        height: 120px;
     }
 
     .even-td {
@@ -404,23 +398,6 @@ img.navbar_icon {
         height: 120px;
     }
 
-    .btn-confirm {
-        background-color: #1450A3;
-        border: 2px solid #1450A3;
-        border-radius: 10px;
-        color: white;
-        padding: 15px 10px;
-        text-align: center;
-    }
-
-    .btn-clear {
-        color: #1450A3;
-        border: 2px solid #1450A3; 
-        border-radius: 10px;
-        padding: 15px 5px;
-        text-align: center;
-    }
-
     .even-td {
         max-width: 100%;
     }
@@ -465,12 +442,6 @@ img.navbar_icon {
         font-size: 0.659rem;
     }
 
-    .total {
-        font-size: 20px;
-        font-weight: bold;
-        margin-top: 5px;
-    }
-
     .list-height {
         height: 56vh;
     }
@@ -481,25 +452,6 @@ img.navbar_icon {
 
     .card-product {
         height: 110px;
-    }
-
-    .btn-confirm {
-        background-color: #1450A3;
-        border: 2px solid #1450A3;
-        border-radius: 10px;
-        color: white;
-        padding: 15px 10px;
-        text-align: center;
-        max-width: 100%;
-    }
-
-    .btn-clear {
-        color: #1450A3;
-        border: 2px solid #1450A3; 
-        border-radius: 10px;
-        padding: 15px 5px;
-        text-align: center;
-        max-width: 100%;
     }
 
     .even-td {
@@ -532,3 +484,4 @@ img.navbar_icon {
         margin-top: 25px;
     }
 }
+

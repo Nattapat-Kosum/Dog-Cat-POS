@@ -81,40 +81,27 @@ function numberWithCommas(x) {
     return x;
 }
 
-// barcode func ตรวจจับการพิมพ์ keyborad เลขรหัสบาร์โค้ด 13 หลัก
-$("#in_barcode").on('keypress', function (kc) {
-    let keycode = kc.which || kc.keyCode;
-    let value = $(this).val();
+// // barcode func ตรวจจับการพิมพ์ keyborad เลขรหัสบาร์โค้ด 13 หลัก
+// $("#in_barcode").on('keypress', function (kc) {
+//     let keycode = kc.which || kc.keyCode;
+//     let value = $(this).val();
 
-    if (keycode == 13) {
-        $(".col-product").filter(function () {
-            $(this).text().search(value) > -1;
-        });
-        $("#barcode" + value).click();
-        $("#in_barcode").val('');
-    };
-});
+//     if (keycode == 13) {
+//         $(".col-product").filter(function () {
+//             $(this).text().search(value) > -1;
+//         });
+//         $("#barcode" + value).click();
+//         $("#in_barcode").val('');
+//     };
+// });
 
-// stack overflow --- barcode
-document.getElementById("in_barcode").addEventListener("input", function () {
-    let value = $(this).val();
+// // โฟกัสการยิง barcode หรือพิมพ์ barcode
+// function rotate() {
+//     $("#in_barcode").focus();
+// }
 
-    if ((this.value).length == 13) {
-        $(".col-product").filter(function () {
-            $(this).text().search(value) > -1;
-        });
-        $("#barcode" + value).click();
-        $("#in_barcode").val('');
-    }
-});
-
-// เรียกใช้ func rotate ให้ focus ทุก 5 วิ
-setInterval(rotate, 5000);
-
-// โฟกัสการยิง barcode หรือพิมพ์ barcode
-function rotate() {
-    $("#in_barcode").focus();
-}
+// // เรียกใช้ func rotate ให้ focus ทุก 5 วิ
+// setInterval(rotate, 5000);
 
 // AutoFocus ส่วนของพิมพ์จำนวนเงินในหน้าชำระเงิน
 $(document).on('shown.bs.modal', function () {
@@ -186,7 +173,7 @@ function printlist() {
             </tr>
         </hr>
     </table>
-    <center><h5>ขอบคุณลูกค้าที่อุดหนุนสินค้าของเรา!</h5></center>
+    <center><h5>Thank you for supporting!</h5></center>
     `;
 
     $("#print").html(html);
@@ -200,21 +187,46 @@ function printlist() {
 
     // bill Section เช็คจำนวนเงินในการชำระสินค้า (เงินชำระไม่พอ === font สีแดง + กดชำระเงินไม่ได้ || เงินชำระถูกต้อง === font สีเขียว + กดชำระเงินได้)
     var billPlease = document.getElementById('bill-please');
-    billPlease.addEventListener('keyup', e => {
+    billPlease.addEventListener('input', e => {
         var currentBill = e.target.value;
-        var txtBill = document.querySelector('.bill-please');
+
+        if (currentBill === '' || currentBill <= 0) {
+            // ถ้าค่าของ 'bill-please' เป็นค่าว่าง
+            document.getElementById("bill-please-hid").value = "";
+        }
         
-        if (sumprice > currentBill) {
-            document.getElementById("bill-please-hid").value = ((sumprice - currentBill) * -1).toFixed(2);
-            // txtBill.innerHTML = ((sumprice - currentBill) * -1).toFixed(2);
+        else {
+            if (sumprice > currentBill) {
+            document.getElementById("bill-please-hid").value = ((sumprice - currentBill) * -1).toFixed(2) + " ฿";
             document.querySelector('.bill-please').style.color = 'red';
             document.getElementById("confirm-bill").disabled = true;
         } else {
-            document.getElementById("bill-please-hid").value =  Math.abs(sumprice - currentBill);
-            // txtBill.innerHTML = Math.abs(sumprice - currentBill);
+            document.getElementById("bill-please-hid").value =  Math.abs(sumprice - currentBill).toFixed(2) + " ฿";
             document.querySelector('.bill-please').style.color = 'green';
             document.getElementById("confirm-bill").disabled = false;
         }
+    }
+    });
+
+    billPlease.addEventListener('keyup', e => {
+        var currentBill = e.target.value;
+        
+        if (currentBill === '' || currentBill <= 0) {
+            // ถ้าค่าของ 'bill-please' เป็นค่าว่าง
+            document.getElementById("bill-please-hid").value = "";
+        }
+        
+        else {
+            if (sumprice > currentBill) {
+            document.getElementById("bill-please-hid").value = ((sumprice - currentBill) * -1).toFixed(2) + " ฿";
+            document.querySelector('.bill-please').style.color = 'red';
+            document.getElementById("confirm-bill").disabled = true;
+        } else {
+            document.getElementById("bill-please-hid").value =  Math.abs(sumprice - currentBill).toFixed(2) + " ฿";
+            document.querySelector('.bill-please').style.color = 'green';
+            document.getElementById("confirm-bill").disabled = false;
+        }
+    }
     });
 }
 
