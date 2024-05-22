@@ -9,14 +9,13 @@
 
 html, body, section {
     overflow: hidden;
-    background-image: radial-gradient(circle, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-    height: 100%;
+    /* background-image: radial-gradient(circle, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); */
+    height: 100vh;
   }
 
   #productbox::-webkit-scrollbar {
     display: none;
 }
-  
 
 .custom-bg-dog {
     background-color: #8C3333;
@@ -70,7 +69,7 @@ html, body, section {
 }
 
 .list-height {
-    height: 60vh;
+    height: 53vh;
 }
 
 .td-pd-name {
@@ -231,8 +230,8 @@ img.navbar_icon {
 }
 
 @media (max-width: 1600px) and (min-width: 1401px) {
-    h5 {
-        font-size: 1.1rem;
+    .product-info h5 {
+        font-size: 15px;
     }
 
     h3 {
@@ -240,7 +239,7 @@ img.navbar_icon {
     }
 
     .list-height {
-        height: 62vh;
+        height: 55vh;
     }
 
     .td-pd-name {
@@ -299,6 +298,7 @@ img.navbar_icon {
 
     th {
         font-size: 15px;
+        width: 35%;
     }
 
     .td-pd-name {
@@ -352,7 +352,7 @@ img.navbar_icon {
     }
 
     .product-info h5 {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .total {
@@ -362,7 +362,7 @@ img.navbar_icon {
 
 }
 
-@media (max-width: 1278px) {
+@media (max-width: 1195px) {
 
     h3 {
         font-size: 22px;
@@ -370,6 +370,7 @@ img.navbar_icon {
 
     th {
         font-size: 14px;
+        width: 35%;
     }
 
     .td-pd-name {
@@ -391,7 +392,15 @@ img.navbar_icon {
     }
 
     .font-confirm {
-        font-size: 16px;
+        font-size: 14px;
+    }
+
+    button.btn-confirm {
+        padding: 10px 15px;
+    }
+
+    button.btn-clear {
+        padding: 10px 15px;
     }
 
     .card-product {
@@ -431,7 +440,7 @@ img.navbar_icon {
     }
 
     th {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .td-pd-name {
@@ -446,7 +455,7 @@ img.navbar_icon {
         height: 56vh;
     }
 
-    .font-confirm {
+    span.font-confirm {
         font-size: 12px;
     }
 
@@ -485,3 +494,28 @@ img.navbar_icon {
     }
 }
 
+@media (max-height: 657px) {
+    .list-height {
+        height: 40vh;
+    }
+
+    span.font-confirm {
+        font-size: 11px;
+    }
+
+    button.btn-confirm {
+        padding: 10px 15px;
+    }
+
+    button.btn-clear {
+        padding: 10px 15px;
+    }
+
+    .total {
+        font-size: 16.8px
+    }
+
+    th {
+        width: 30%;
+    }
+}

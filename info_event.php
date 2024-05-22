@@ -1,3 +1,4 @@
+<?php include("src/db/connect.php"); ?>
 <script>
 
 // Navbar ด้านล่างหน้าจอ ถ้ามีการ get action?homepage จะให้แสดงผลที่หน้าจอ ถ้าไม่จะให้แสดง Modal เลือกประเภทสินค้าของสัตว์เลี้ยง
@@ -15,12 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     </li>
                 </div>
             <?php
-            $query = mysqli_query($conn, "SELECT * FROM product_type");
-            while ($data =  mysqli_fetch_array($query)) { ?>
+            $sql = $conn->query("SELECT * FROM product_type");
+            $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($rows as $row) { ?>
+            
                 <div class="col p-0">
-                    <li class="text-center pro-type border-start border-end border-1" onclick="select_product_type_dog(<?php echo $data['id']; ?>)">
-                        <img src="src/img/<?php echo $data['icon_img']; ?>" alt="" style="height:45px; margin:0px;">
-                        <br><span><?php echo $data['product_type']; ?></span></br>
+                    <li class="text-center pro-type border-start border-end border-1" onclick="select_product_type_dog(<?php echo $row['id']; ?>)">
+                        <img src="src/img/<?php echo $row['icon_img']; ?>" alt="" style="height:45px; margin:0px;">
+                        <br><span><?php echo $row['product_type']; ?></span></br>
                     </li>
                 </div>
             <?php } ?>
@@ -52,12 +56,15 @@ document.querySelector('#dog').addEventListener('click', function() {
                     </li>
                 </div>
             <?php
-            $query = mysqli_query($conn, "SELECT * FROM product_type");
-            while ($data =  mysqli_fetch_array($query)) { ?>
+             $sql = $conn->query("SELECT * FROM product_type");
+             $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+             foreach ($rows as $row) { ?>
+
                 <div class="col p-0">
-                    <li class="text-center pro-type border-start border-end border-1" onclick="select_product_type_dog(<?php echo $data['id']; ?>)">
-                        <img src="src/img/<?php echo $data['icon_img']; ?>" alt="" style="height:45px; margin:0px;">
-                        <br><span><?php echo $data['product_type']; ?></span></br>
+                    <li class="text-center pro-type border-start border-end border-1" onclick="select_product_type_dog(<?php echo $row['id']; ?>)">
+                        <img src="src/img/<?php echo $row['icon_img']; ?>" alt="" style="height:45px; margin:0px;">
+                        <br><span><?php echo $row['product_type']; ?></span></br>
                     </li>
                 </div>
             <?php } ?>
@@ -82,12 +89,15 @@ document.querySelector('#cat').addEventListener('click', function() {
                     </li>
                 </div>
             <?php
-            $query = mysqli_query($conn, "SELECT * FROM product_type");
-            while ($data =  mysqli_fetch_array($query)) { ?>
+             $sql = $conn->query("SELECT * FROM product_type");
+             $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+             foreach ($rows as $row) { ?>
+
                 <div class="col p-0">
-                    <li class="text-center pro-type border-start border-end border-1" onclick="select_product_type_cat(<?php echo $data['id']; ?>)">
-                        <img src="src/img/<?php echo $data['icon_img']; ?>" alt="" style="height:45px; margin:0px;">
-                        <br><span><?php echo $data['product_type']; ?></span></br>
+                    <li class="text-center pro-type border-start border-end border-1" onclick="select_product_type_cat(<?php echo $row['id']; ?>)">
+                        <img src="src/img/<?php echo $row['icon_img']; ?>" alt="" style="height:45px; margin:0px;">
+                        <br><span><?php echo $row['product_type']; ?></span></br>
                     </li>
                 </div>
             <?php } ?>
@@ -106,14 +116,16 @@ function dogProduct() {
     var list = [];
     html += `
             <?php
-            $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'dog' ORDER BY `pd_name` ASC");
-            while ($data2 =  mysqli_fetch_array($query2)) {
+            $stmt = $conn->query("SELECT * FROM product WHERE animal = 'dog' ORDER BY `pd_name` ASC");
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($rows as $row) {
+
             ?>
                 <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                        <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                        <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                         <div class="card-body product-info">
-                            <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                            <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                         </div>
                     </div>
                 </div>
@@ -131,14 +143,16 @@ function catProduct() {
     var list = [];
     html += `
             <?php
-            $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'cat' ORDER BY `pd_name` ASC");
-            while ($data2 =  mysqli_fetch_array($query2)) {
+            $stmt = $conn->query("SELECT * FROM product WHERE animal = 'cat' ORDER BY `pd_name` ASC");
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($rows as $row) {
+
             ?>
                 <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                        <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                        <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                         <div class="card-body product-info">
-                            <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                            <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                         </div>
                     </div>
                 </div>
@@ -154,23 +168,24 @@ function select_product_type_dog(idpd_type) {
     if (idpd_type == 1) {
         html += `
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'dog' ORDER BY `pd_name` ASC");
-                while ($data2 =  mysqli_fetch_array($query2)) {
+                $stmt = $conn->query("SELECT * FROM product WHERE animal = 'dog' ORDER BY `pd_name` ASC");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $row) {
                 ?>
                     <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                            <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                            <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                             <div class="card-body product-info">
-                                <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                                <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col col-product">
-                <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                    <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                    <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                     <div class="card-body product-info">
-                        <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                        <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                     </div>
                 </div>
             </div>
@@ -179,14 +194,16 @@ function select_product_type_dog(idpd_type) {
     } else if (idpd_type == 2) {
         html += `
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'dog' and `id_type` = '2' ORDER BY `pd_name` ASC");
-                while ($data2 =  mysqli_fetch_array($query2)) {
+                $stmt = $conn->query("SELECT * FROM product WHERE animal = 'dog' and `id_type` = '2' ORDER BY `pd_name` ASC");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $row) {
+    
                 ?>
                     <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                            <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                            <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                             <div class="card-body product-info">
-                                <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                                <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                             </div>
                         </div>
                     </div>
@@ -195,14 +212,15 @@ function select_product_type_dog(idpd_type) {
     } else if (idpd_type == 3) {
         html += `
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'dog' and `id_type` = '3' ORDER BY `pd_name` ASC");
-                while ($data2 =  mysqli_fetch_array($query2)) {
+                $stmt = $conn->query("SELECT * FROM product WHERE animal = 'dog' and `id_type` = '3' ORDER BY `pd_name` ASC");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $row) {
                 ?>
                     <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                            <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                            <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                             <div class="card-body product-info">
-                                <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                                <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                             </div>
                         </div>
                     </div>
@@ -211,14 +229,15 @@ function select_product_type_dog(idpd_type) {
     } else if (idpd_type == 4) {
         html += `
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'dog' and `id_type` = '4' ORDER BY `pd_name` ASC");
-                while ($data2 =  mysqli_fetch_array($query2)) {
+                $stmt = $conn->query("SELECT * FROM product WHERE animal = 'dog' and `id_type` = '4' ORDER BY `pd_name` ASC");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $row) {
                 ?>
                     <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                            <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                            <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                             <div class="card-body product-info">
-                                <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                                <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                             </div>
                         </div>
                     </div>
@@ -233,15 +252,16 @@ function select_product_type_cat(idpd_type) {
     if (idpd_type == 1) {
         html += `
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'cat' ORDER BY `pd_name` ASC");
-                while ($data2 =  mysqli_fetch_array($query2)) {
+                $stmt = $conn->query("SELECT * FROM product WHERE animal = 'cat' ORDER BY `pd_name` ASC");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $row) {
                 ?>
                     <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', 
-                        '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                            <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', 
+                        '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                            <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                             <div class="card-body product-info">
-                                <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                                <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                             </div>
                         </div>
                     </div>
@@ -250,14 +270,15 @@ function select_product_type_cat(idpd_type) {
     } else if (idpd_type == 2) {
         html += `
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'cat' and `id_type` = '2' ORDER BY `pd_name` ASC");
-                while ($data2 =  mysqli_fetch_array($query2)) {
+                $stmt = $conn->query("SELECT * FROM product WHERE animal = 'cat' and `id_type` = '2' ORDER BY `pd_name` ASC");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $row) {
                 ?>
                     <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                            <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                            <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                             <div class="card-body product-info">
-                                <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                                <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                             </div>
                         </div>
                     </div>
@@ -266,14 +287,15 @@ function select_product_type_cat(idpd_type) {
     } else if (idpd_type == 3) {
         html += `
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'cat' and `id_type` = '3' ORDER BY `pd_name` ASC");
-                while ($data2 =  mysqli_fetch_array($query2)) {
+                $stmt = $conn->query("SELECT * FROM product WHERE animal = 'cat' and `id_type` = '3' ORDER BY `pd_name` ASC");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $row) {
                 ?>
                     <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                            <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                            <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                             <div class="card-body product-info">
-                                <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                                <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                             </div>
                         </div>
                     </div>
@@ -282,14 +304,15 @@ function select_product_type_cat(idpd_type) {
     } else if (idpd_type == 4) {
         html += `
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM product WHERE animal = 'cat' and `id_type` = '4' ORDER BY `pd_name` ASC");
-                while ($data2 =  mysqli_fetch_array($query2)) {
+                $stmt = $conn->query("SELECT * FROM product WHERE animal = 'cat' and `id_type` = '4' ORDER BY `pd_name` ASC");
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $row) {
                 ?>
                     <div class="col col-product">
-                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $data2['barcode'] ?>" onclick="select_product('<?php echo $data2['id']; ?>', '<?php echo $data2['pd_name']; ?>', '<?php echo $data2['img']; ?>', <?php echo str_replace(',', '', number_format($data2['price'], 2)); ?>)">
-                            <img src="src/img/<?php echo $data2['img']; ?>" class="card-img-top me-auto ms-auto card-product">
+                    <div class="card product-items menu-item overflow-hidden" id="barcode<?php echo $row['barcode'] ?>" onclick="select_product('<?php echo $row['id']; ?>', '<?php echo $row['pd_name']; ?>', '<?php echo $row['img']; ?>', <?php echo str_replace(',', '', number_format($row['price'], 2)); ?>)">
+                            <img src="src/img/<?php echo $row['img']; ?>" class="card-img-top me-auto ms-auto card-product">
                             <div class="card-body product-info">
-                                <h5 class="line-clamp" style="color:#393646"><?php echo $data2['pd_name']; ?></h5>
+                                <h5 class="line-clamp" style="color:#393646"><?php echo $row['pd_name']; ?></h5>
                             </div>
                         </div>
                     </div>
