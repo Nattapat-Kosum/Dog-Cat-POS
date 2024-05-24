@@ -42,14 +42,14 @@ if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['c
             <div class="col-md-6 right-box">
                 <div class="row algin-items-center">
 
-                    <form action="./register.php" method="post">
+                    <form action="./register.php" method="">
                         <div class="header-text mb-3">
                             <h2>หน้าสมัครสมาชิก</h2>
                             <p>กรอกข้อมูลเพื่อสมัครสมาชิก</p>
                         </div>
 
                         <div class="input-group mb-3">
-                            <input class="form-control" type="text" name="username" placeholder="Username" aria-label="default input example" required>
+                            <input class="form-control" type="email" name="username" placeholder="Email" aria-label="default input example" required>
                         </div>
 
                         <div class="input-group mb-3">

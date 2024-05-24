@@ -76,9 +76,9 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
                             <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">เข้าสู่ระบบ</button>
                         </div>
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <small>Don't have account? <a href="./register.php">Sign Up</a></small>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>

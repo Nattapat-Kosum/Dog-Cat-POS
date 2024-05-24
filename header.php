@@ -41,6 +41,10 @@ include("src/db/connect.php");
         </li>
 
         <li class="nav-item">
+          <a class="nav-link text-decoration-underline" style="color:green;" href="/dogcatPos/backend/">Go to Dashboard</a>
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link text-decoration-underline" style="color:red;" href="./login-register/logout.php">logout.</a>
         </li>
       </ul>
